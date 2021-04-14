@@ -361,3 +361,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+AppContext/bin
+AppContex/obj
+
+Repository/bin
+Repository/obj
+
+Services/bin
+Services/obj
+
+Wpf/bin
+Wpf/obj
