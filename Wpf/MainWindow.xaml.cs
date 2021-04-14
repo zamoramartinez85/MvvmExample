@@ -22,6 +22,7 @@ namespace Wpf
     {
         public MainWindow()
         {
+            Console.WriteLine("");
             InitializeComponent();
         }
     }
