@@ -1,5 +1,5 @@
 ﻿using AppContext.Models;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using Repository.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ namespace Services.AuthenticationService
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IRepository repository;
-        private readonly IPasswordHasher passwordHasher;
+        private readonly IPasswordHasher<User> passwordHasher;
 
-        public AuthenticationService(IRepository repository, IPasswordHasher passwordHasher)
+        public AuthenticationService(IRepository repository, IPasswordHasher<User> passwordHasher)
         {
             this.repository = repository;
             this.passwordHasher = passwordHasher;
@@ -24,7 +24,7 @@ namespace Services.AuthenticationService
 
             if(selectedUser != null)
             {
-                PasswordVerificationResult passwordResult = passwordHasher.VerifyHashedPassword(selectedUser.Password, password);
+                PasswordVerificationResult passwordResult = passwordHasher.VerifyHashedPassword(selectedUser, selectedUser.Password, password);
                 if (passwordResult != PasswordVerificationResult.Success)
                     selectedUser = null;
             }
@@ -39,10 +39,11 @@ namespace Services.AuthenticationService
             {
                 User newUser = new User()
                 {
-                    Username = username,
-                    Password = passwordHasher.HashPassword(password),
+                    Username = username,                    
                     CreationDateTime = DateTime.Now
                 };
+
+                newUser.Password = passwordHasher.HashPassword(newUser, password);
                 repository.CreateUser(newUser);
             }
             return IsRegistred;

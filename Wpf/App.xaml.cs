@@ -1,6 +1,6 @@
 ﻿using AppContext.DAL;
 using AppContext.Models;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Debug;
@@ -52,7 +52,7 @@ namespace Wpf
         {
             IServiceCollection services = new ServiceCollection();
 
-            services.AddSingleton<IPasswordHasher, PasswordHasher>();
+            services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddSingleton(x =>
             {
                 ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>

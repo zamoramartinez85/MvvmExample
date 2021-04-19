@@ -8,6 +8,15 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
 	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all"/>
+    <AdditionalFiles Include="$(SolutionDir)stylecop.json" Link="stylecop.json"/>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)ArisCSharp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
 	
 </Project>
 

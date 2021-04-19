@@ -27,7 +27,8 @@ namespace Repository.Repository
             {
                 context.Users.Add(user);
                 context.SaveChanges();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 logger.LogError($"Exception at Repository.CreateUser: {ex}");
                 InsertErrorLog(new ErrorLog()
