@@ -11,8 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Re
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{4EB533B0-CE14-4942-9FE4-8EC8630E44CE}"
 	ProjectSection(SolutionItems) = preProject
-		ArisCSharp.ruleset = ArisCSharp.ruleset
 		Directory.Build.props = Directory.Build.props
+		RuleSetCSharp.ruleset = RuleSetCSharp.ruleset
 		Settings.StyleCop = Settings.StyleCop
 		stylecop.json = stylecop.json
 	EndProjectSection

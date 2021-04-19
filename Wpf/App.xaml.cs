@@ -23,11 +23,9 @@ namespace Wpf
     /// </summary>
     public partial class App : Application
     {
-
         private IServiceProvider serviceProvider;
         protected override void OnStartup(StartupEventArgs e)
         {
-
             serviceProvider = CreateServiceProvider();
             TestServiceProvider();
 

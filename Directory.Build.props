@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)ArisCSharp.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)RuleSetCSharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 	
 </Project>

@@ -39,6 +39,7 @@ namespace Repository.Repository
                 });
                 user = null;
             }
+
             return user;
         }
 
@@ -61,7 +62,8 @@ namespace Repository.Repository
                     StackErrorMessage = ex.ToString(),
                     ErrorThrownAt = "Repository.DeleteUser"
                 });
-            } 
+            }
+            
             return isDeleted;
         }
 
@@ -98,6 +100,7 @@ namespace Repository.Repository
                 });
                 user = null;
             }
+
             return user;
         }
         #endregion
@@ -113,10 +116,11 @@ namespace Repository.Repository
                 context.SaveChanges();
                 isInserted = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogError($"Exception at Repository.InsertErrorLog: {ex}");
             }
+
             return isInserted;
         }
         #endregion
