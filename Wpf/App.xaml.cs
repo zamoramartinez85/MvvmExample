@@ -14,6 +14,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Wpf.Tools;
 
 namespace Wpf
 {
@@ -35,11 +36,15 @@ namespace Wpf
 
         private void TestServiceProvider()
         {
+            string username = "David";
+            string password = "1234";
             IAuthenticationService authenticationService = serviceProvider.GetRequiredService<IAuthenticationService>();
-            if (authenticationService.Login("David", "1234") == null)
+            if (authenticationService.Login(username, password) == null)
             {
-                bool registrationTest = authenticationService.Register("David", "1234", "1234");
-                User loginTest = authenticationService.Login("David", "1234");
+                bool registrationTest = authenticationService.Register(username, password, password);
+                User newUser = authenticationService.Login(username, password);
+                newUser = Initializator.CreateNewUserWithAdminPrivilegesAtInitialization(newUser);
+                Initializator.UpdateNewUserWithRole(newUser, serviceProvider.GetRequiredService<IRepository>());
             }
         }
 

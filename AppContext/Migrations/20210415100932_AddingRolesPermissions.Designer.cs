@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppContext.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210415083808_AddingRolesPermissions")]
+    [Migration("20210415100932_AddingRolesPermissions")]
     partial class AddingRolesPermissions
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,15 +78,10 @@ namespace AppContext.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -106,11 +101,19 @@ namespace AppContext.Migrations
                     b.ToTable("PermissionRole");
                 });
 
-            modelBuilder.Entity("AppContext.Models.User", b =>
+            modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.HasOne("AppContext.Models.Role", null)
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId");
+                    b.Property<int>("RolesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("RolesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("RoleUser");
                 });
 
             modelBuilder.Entity("PermissionRole", b =>
@@ -128,9 +131,19 @@ namespace AppContext.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AppContext.Models.Role", b =>
+            modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.Navigation("Users");
+                    b.HasOne("AppContext.Models.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AppContext.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
