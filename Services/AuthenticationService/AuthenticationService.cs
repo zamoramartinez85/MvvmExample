@@ -22,18 +22,19 @@ namespace Services.AuthenticationService
         {
             User selectedUser = repository.GetUserByName(username);
 
-            if(selectedUser != null)
+            if (selectedUser != null)
             {
                 PasswordVerificationResult passwordResult = passwordHasher.VerifyHashedPassword(selectedUser, selectedUser.Password, password);
                 if (passwordResult != PasswordVerificationResult.Success)
                     selectedUser = null;
             }
+
             return selectedUser;
         }
 
         public bool Register(string username, string password, string confirmPassword)
         {
-            bool IsRegistred = false;
+            bool isRegistred = false;
 
             if (password.Equals(confirmPassword))
             {
@@ -46,7 +47,8 @@ namespace Services.AuthenticationService
                 newUser.Password = passwordHasher.HashPassword(newUser, password);
                 repository.CreateUser(newUser);
             }
-            return IsRegistred;
+
+            return isRegistred;
         }
     }
 }
